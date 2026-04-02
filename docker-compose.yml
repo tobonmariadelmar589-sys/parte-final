@@ -1,0 +1,22 @@
+# docker-compose.yml
+# Levanta la aplicación en un entorno reproducible
+
+version: "3.8"
+
+services:
+  lawfirm:
+    build: .
+    container_name: lawfirm_app
+    volumes:
+      # Monta el directorio local para que los cambios se reflejen en el contenedor
+      - .:/app
+      # Volumen persistente para la base de datos
+      - lawfirm_data:/app/lawfirm.db
+    environment:
+      - DISPLAY=${DISPLAY}
+    network_mode: host
+    stdin_open: true
+    tty: true
+
+volumes:
+  lawfirm_data:
